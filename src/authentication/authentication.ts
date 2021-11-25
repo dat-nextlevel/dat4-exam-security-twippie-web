@@ -10,7 +10,7 @@ export function handleSignOut() {
 export const getSignedInUser = async (): Promise<User> => {
 	const token = localStorage.getItem("token");
 	if (token) {
-		api.defaults.headers.common["Authorization"] = `Bearer ${token}`
+		api.defaults.headers["Authorization"] = `Bearer ${token}`
 	}
 	try {
 		const response = await api.get<User>("me");

@@ -1,4 +1,4 @@
-import Home from "./pages/Feed.svelte"
+import Feed from "./pages/Feed.svelte"
 
 export const routes = [
 	/**
@@ -9,7 +9,7 @@ export const routes = [
 	{
 		path: "/",
 		exact: true,
-		component: Home
+		component: Feed
 	},
 	{
 		path: "/sign-in",

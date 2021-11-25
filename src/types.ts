@@ -2,7 +2,7 @@ export type User = {
 	"username": string,
 	"likedPosts": Array<Post>,
 	"posts": Array<Post>
-	"createdDate": Number,
+	"createdDate": number,
 	"avatar": Image,
 	"email": String
 }
@@ -12,7 +12,7 @@ export type Post = {
 	"author": User,
 	"content": string,
 	"image": Image,
-	"createdAt": Number,
+	"createdAt": number,
 	"likes": Array<String>
 }
 

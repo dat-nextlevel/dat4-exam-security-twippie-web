@@ -2,7 +2,7 @@
 </script>
 
 <div class="container">
-	<div class="content">
+	<div class="content mx-auto">
 		<slot />
 	</div>
 </div>
