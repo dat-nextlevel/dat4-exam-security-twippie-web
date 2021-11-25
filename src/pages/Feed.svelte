@@ -2,10 +2,12 @@
 	import { onMount } from "svelte";
 
 	import DefaultLayout from "../components/layout/DefaultLayout.svelte";
+	import CreatePost from "../components/ui/post/CreatePost.svelte";
 	import PostComponent from "../components/ui/post/Post.svelte";
 
-	import { api } from "../settings";
-	import type { Post } from "../types";
+	import { api } from "../utils/settings";
+	import { user } from "../stores/user";
+	import type { Post } from "../utils/types";
 
 	let posts: Array<Post> = [];
 
@@ -23,6 +25,11 @@
 	<div class="header-label">
 		<h1>Feed</h1>
 	</div>
+	{#if $user}
+		<div class="mb-8">
+			<CreatePost />
+		</div>
+	{/if}
 	<div>
 		{#if posts.length == 0}
 			<div class="text-center">

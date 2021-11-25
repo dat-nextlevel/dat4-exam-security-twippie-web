@@ -4,6 +4,12 @@
 	import { user } from "./stores/user";
 	import { routes } from "./routes";
 	import PrivateRoute from "./components/route/PrivateRoute.svelte";
+	import { getSignedInUser } from "./authentication/authentication";
+	import { onMount } from "svelte";
+
+	onMount(async () => {
+		user.set(await getSignedInUser());
+	});
 </script>
 
 <main>
