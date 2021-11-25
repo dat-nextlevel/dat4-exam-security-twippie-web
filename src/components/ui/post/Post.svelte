@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { Post } from "../../types";
+	import type { Post } from "../../../types";
 	import dayjs from "dayjs";
 	import relativeTime from "dayjs/plugin/relativeTime";
+	import IconButton from "../buttons/IconButton.svelte";
 	dayjs.extend(relativeTime);
 
 	export let post: Post;
@@ -22,13 +23,12 @@
 				{post.content}
 				{#if post.image != null}
 					<!-- svelte-ignore a11y-missing-attribute -->
-					<img class="max-w-full w-full mt-4" src={"data:image/png;base64," + post.image.base64} />
+					<img class="max-w-full w-full mt-3" src={"data:image/png;base64," + post.image.base64} />
 				{/if}
 			</div>
-			<footer class="mt-4">
+			<footer class="mt-3">
 				<div class="flex items-center">
-					<button class="rounded hover:bg-blue-100 hover:text-blue-500 grid place-items-center mr-2 p-1 transition-colors"><span class="material-icons text-md"> favorite_border </span></button>
-					{post.likes.length}
+					<IconButton icon="thumb_up" active={false} color="green-600" text={post.likes.length} />
 				</div>
 			</footer>
 		</div>

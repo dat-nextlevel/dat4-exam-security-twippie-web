@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 
 	import DefaultLayout from "../components/layout/DefaultLayout.svelte";
-	import PostComponent from "../components/ui/Post.svelte";
+	import PostComponent from "../components/ui/post/Post.svelte";
 
 	import { api } from "../settings";
 	import type { Post } from "../types";
@@ -20,8 +20,19 @@
 </script>
 
 <DefaultLayout>
-	<h1>Feed</h1>
-	{#each posts as post}
-		<PostComponent {post} />
-	{/each}
+	<div class="header-label">
+		<h1>Feed</h1>
+	</div>
+	<div>
+		{#if posts.length == 0}
+			<div class="text-center">
+				<span class="material-icons text-4xl"> try </span>
+				<h2>An empty space.</h2>
+				<p>Nobody has posted anything... yet!</p>
+			</div>
+		{/if}
+		{#each posts as post}
+			<PostComponent {post} />
+		{/each}
+	</div>
 </DefaultLayout>
