@@ -3,9 +3,10 @@
 	import PrivateRouteGuard from "./PrivateRouteGuard.svelte";
 
 	export let path;
+	export let exact;
 </script>
 
-<Route {path} let:params let:location let:navigate>
+<Route {path} {exact} let:params let:location let:navigate>
 	<PrivateRouteGuard>
 		<slot {params} {location} {navigate} />
 	</PrivateRouteGuard>

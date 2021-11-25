@@ -1,3 +1,5 @@
+import Home from "./pages/Feed.svelte"
+
 export const routes = [
 	/**
 	 *
@@ -7,8 +9,20 @@ export const routes = [
 	{
 		path: "/",
 		exact: true,
+		component: Home
 	},
 	{
 		path: "/sign-in",
+	},
+
+	/**
+	 * 
+	 * Protected
+	 * 
+	 */
+
+	{
+		path: "/settings",
+		protected: true
 	},
 ]
