@@ -3,7 +3,7 @@
 
 	import { register } from "../../../authentication/authentication";
 	import { user } from "../../../stores/user";
-	import type { FormDataRegister } from "../../../utils/types";
+	import type { FormDataRegister } from "../../../types";
 
 	const dispatch = createEventDispatcher();
 

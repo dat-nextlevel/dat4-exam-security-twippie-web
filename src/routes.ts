@@ -1,4 +1,5 @@
 import Feed from "./pages/Feed.svelte"
+import Settings from "./pages/Settings.svelte"
 
 export const routes = [
 	/**
@@ -23,6 +24,8 @@ export const routes = [
 
 	{
 		path: "/settings",
-		protected: true
+		protected: true,
+		component: Settings
+
 	},
 ]

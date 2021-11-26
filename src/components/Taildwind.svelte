@@ -38,5 +38,9 @@
 		.bttn {
 			@apply bg-indigo-400 transition-colors hover:bg-opacity-20 bg-opacity-10 hover:text-indigo-700 text-indigo-500 rounded px-4 py-2;
 		}
+
+		.nav-link {
+			@apply inline-flex rounded group gap-2 place-items-center hover:bg-indigo-500 text-black hover:text-indigo-700 hover:bg-opacity-10 transition-colors px-4 py-3;
+		}
 	}
 </style>

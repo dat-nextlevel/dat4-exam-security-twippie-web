@@ -1,6 +1,6 @@
 import { user } from "../stores/user"
 import { api } from "../utils/settings";
-import type { FormDataLogin, FormDataRegister, User } from "../utils/types";
+import type { FormDataLogin, FormDataRegister, User } from "../types";
 
 export function handleSignOut() {
 	user.set(null);

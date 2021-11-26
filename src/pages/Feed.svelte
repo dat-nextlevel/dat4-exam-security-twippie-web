@@ -7,7 +7,7 @@
 
 	import { api } from "../utils/settings";
 	import { user } from "../stores/user";
-	import type { Post } from "../utils/types";
+	import type { Post } from "../types";
 
 	let posts: Array<Post> = [];
 

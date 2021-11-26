@@ -4,7 +4,8 @@ export type User = {
 	"posts": Array<Post>
 	"createdDate": number,
 	"avatar": Image,
-	"email": String
+	"email": String,
+	"roles": Array<string>
 }
 
 export type Post = {
