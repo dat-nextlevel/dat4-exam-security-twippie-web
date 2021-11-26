@@ -8,15 +8,24 @@
 	import { user } from "../../../stores/user";
 	import { api } from "../../../utils/settings";
 	import Username from "../Username.svelte";
+	import { getSignedInUser } from "../../../authentication/authentication";
 	dayjs.extend(relativeTime);
 
 	export let post: Post;
 
-	async function handleLike(post: Post) {
+	async function handleLike(_post: Post) {
 		if ($user) {
 			const doesLike = $user.likedPosts?.filter((lp) => lp.id == post.id).length > 0;
-			await api.put(`posts/${post.id}/like`, { isLiked: !doesLike });
+			const response = await api.put(`posts/${_post.id}/like`, { isLiked: !doesLike });
+
+			post = response.data as Post;
+
+			user.set(await getSignedInUser());
 		}
+	}
+
+	function isOwner() {
+		return post.author.username == $user?.username;
 	}
 </script>
 
@@ -26,10 +35,15 @@
 			<Avatar image={getImageUrl(post.author.avatar?.id || null)} />
 		</div>
 		<div class="flex-1 p-2">
-			<header>
+			<header class="flex gap-2 place-items-center">
 				<Username>{post.author.username}</Username>
 				<span> · </span>
 				<span>{dayjs().diff(post.createdAt, "week") >= 1 ? dayjs(post.createdAt).format("MMM DD") : dayjs(post.createdAt).fromNow()}</span>
+				{#if isOwner()}
+					<span class="ml-auto text-black">
+						<IconButton icon="more_horiz" color="indigo-500" size={18} />
+					</span>
+				{/if}
 			</header>
 			<div>
 				{post.content}

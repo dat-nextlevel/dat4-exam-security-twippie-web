@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { createEventDispatcher } from "svelte";
+
 	import { user } from "../../../stores/user";
+	import type { Post } from "../../../types";
 	import { api } from "../../../utils/settings";
 	import { getImageUrl } from "../../../utils/util";
 
@@ -7,20 +10,25 @@
 	import IconButton from "../buttons/IconButton.svelte";
 	import TextArea from "../TextAreaAutosize.svelte";
 
+	const dispatcher = createEventDispatcher();
+
 	let content: string;
 
 	let image;
 	let showImage = false;
 	let input;
 
-	async function handlePost(event: Event) {
+	async function handlePost() {
 		const formData = new FormData();
 		formData.append("content", content);
 		if (showImage) formData.append("image", input?.files[0]);
 
 		console.log(formData);
 
-		api.post("posts", formData, { headers: { "Content-Type": "multipart/form-data" } });
+		try {
+			const response = await api.post("posts", formData, { headers: { "Content-Type": "multipart/form-data" } });
+			dispatcher("created", response.data as Post);
+		} catch (error) {}
 	}
 
 	function handleInputChange() {
@@ -56,7 +64,7 @@
 				<div class="flex pt-2 place-items-end">
 					<div class="flex">
 						<input hidden type="file" bind:this={input} on:change={handleInputChange} name="image" />
-						<IconButton on:click={() => input.click()} icon="add_photo_alternate" size="2xl" color="indigo-600" />
+						<IconButton on:click={() => input.click()} icon="add_photo_alternate" size={24} color="indigo-600" />
 					</div>
 					<button type="submit" class="bttn ml-auto">Post</button>
 				</div>

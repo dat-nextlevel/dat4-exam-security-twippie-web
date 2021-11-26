@@ -1,10 +1,12 @@
 import { user } from "../stores/user"
 import { api } from "../utils/settings";
 import type { FormDataLogin, FormDataRegister, User } from "../types";
+import { navigate } from "svelte-navigator";
 
 export function handleSignOut() {
 	user.set(null);
 	localStorage.removeItem("token")
+	navigate("/")
 }
 
 export const getSignedInUser = async (): Promise<User> => {

@@ -1,7 +1,4 @@
 <script lang="ts">
-	import App from "../../App.svelte";
-	import CreatePost from "./post/CreatePost.svelte";
-
 	export let value = "";
 	export let minRows = 1;
 	export let maxRows;
