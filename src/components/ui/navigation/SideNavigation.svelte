@@ -27,7 +27,7 @@
 				<nav class="flex gap-4 flex-col">
 					<div>
 						<Link to="/" class="nav-link">
-							<Avatar image={getImageUrl($user.avatar?.id)} size={30} />
+							<Avatar image={getImageUrl($user.avatar?.id)} username={$user.username} size={30} />
 							<Username>{$user.username}</Username>
 						</Link>
 					</div>
@@ -45,7 +45,7 @@
 					</div>
 					{#if $user?.roles.find((r) => r == "ADMIN") != null}
 						<div>
-							<Link to="/admin" class="nav-link hover:bg-opacity-10 text-sky-700 hover:bg-sky-500 hover:text-sky-700">
+							<Link to="/admin" class="nav-link hover:bg-opacity-10 text-blue-700 hover:bg-blue-500 hover:text-blue-700">
 								<span class="material-icons-outlined ">admin_panel_settings</span>
 								<span class="">Admin</span>
 							</Link>

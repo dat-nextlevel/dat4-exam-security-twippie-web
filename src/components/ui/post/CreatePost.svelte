@@ -55,7 +55,7 @@
 	<div class="p-4 border border-indigo-200 rounded">
 		<div class="flex">
 			<div class="pr-4">
-				<Avatar size={60} image={getImageUrl($user?.avatar?.id || null)} />
+				<Avatar size={60} username={$user.username} image={getImageUrl($user?.avatar?.id)} />
 			</div>
 			<div class="flex-1">
 				<TextArea bind:value={content} maxRows="15" props={{ placeholder: "What's happening?", required: true }} className="focus:outline-none border-b border-opacity-0 focus:border-opacity-100" />

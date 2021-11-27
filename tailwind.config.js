@@ -1,4 +1,4 @@
-const colors = require('tailwindcss/colors');
+
 
 module.exports = {
 	future: {
@@ -8,7 +8,6 @@ module.exports = {
 	purge: [],
 	darkMode: false, // or 'media' or 'class'
 	theme: {
-		colors,
 		container: {
 			center: true
 		},

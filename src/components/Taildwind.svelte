@@ -24,7 +24,7 @@
 		}
 
 		.avatar {
-			@apply rounded-full bg-center bg-cover bg-no-repeat bg-coolGray-300;
+			@apply rounded-full bg-center bg-cover bg-no-repeat bg-gray-200;
 		}
 
 		.header-label {

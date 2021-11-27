@@ -3,15 +3,17 @@
 
 	import DefaultLayout from "../../components/layout/DefaultLayout.svelte";
 	import IconButton from "../../components/ui/buttons/IconButton.svelte";
+	import { getColorCssClassFromUsername } from "../../utils/util";
+	import AdminUsers from "./AdminUsers.svelte";
 </script>
 
 <DefaultLayout>
 	<Router>
-		<div class="header-label">
+		<div class="header-label text-">
 			<Link to="/" class="flex place-items-center"><IconButton icon="arrow_back" color="indigo-500" /></Link>
 			<h1>Admin panel</h1>
 		</div>
-		<nav class="flex gap-4 mb-8 border-b pb-4 border-black border-opacity-20">
+		<nav class="flex gap-8 mb-8 border-b pb-4 border-black border-opacity-20">
 			<Link to="" class="nav-admin-link">
 				<span class="material-icons-outlined ">dashboard</span>
 				<span class="">Dashboard</span>
@@ -23,6 +25,8 @@
 		</nav>
 
 		<Route path="/">Default</Route>
-		<Route path="admin">This contet lit</Route>
+		<Route path="/users">
+			<AdminUsers />
+		</Route>
 	</Router>
 </DefaultLayout>

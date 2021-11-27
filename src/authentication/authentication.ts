@@ -14,7 +14,7 @@ export const getSignedInUser = async (): Promise<User> => {
 	if (token) {
 		api.defaults.headers["Authorization"] = `Bearer ${token}`
 		try {
-			const response = await api.get<User>("me");
+			const response = await api.get<User>("users/me");
 			return response.data;
 		}
 		catch (error) {

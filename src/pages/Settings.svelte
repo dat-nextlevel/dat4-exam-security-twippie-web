@@ -20,7 +20,7 @@
 		const data = Object.fromEntries(formData);
 
 		try {
-			const response = await api.put("me", data);
+			const response = await api.put("users/me", data);
 			user.set(response.data as User);
 			target.reset();
 		} catch (error) {}
@@ -65,7 +65,7 @@
 	</div>
 	<div class="flex place-items-center gap-4 mb-8">
 		<div class="flex items-center flex-col gap-2">
-			<Avatar image={imageData} size={84} />
+			<Avatar image={imageData} size={84} username={$user.username} />
 			<form on:submit|preventDefault={handleImageSubmit}>
 				<input hidden type="file" bind:this={newImageInput} on:change={handleImageSrc} name="image" />
 				{#if changingImage}

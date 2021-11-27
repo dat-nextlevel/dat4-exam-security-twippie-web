@@ -39,7 +39,7 @@
 <article>
 	<div class="flex">
 		<div class="p-2">
-			<Avatar image={getImageUrl(post.author.avatar?.id || null)} />
+			<Avatar image={getImageUrl(post.author.avatar?.id)} username={post.author.username} />
 		</div>
 		<div class="flex-1 p-2">
 			<header class="flex gap-2 place-items-center">
