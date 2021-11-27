@@ -27,12 +27,6 @@
 				<nav class="flex gap-4 flex-col">
 					<div>
 						<Link to="/" class="nav-link">
-							<Avatar image={getImageUrl($user.avatar?.id)} username={$user.username} size={30} />
-							<Username>{$user.username}</Username>
-						</Link>
-					</div>
-					<div>
-						<Link to="/" class="nav-link">
 							<span class="material-icons-outlined ">chat_bubble_outline</span>
 							<span class="">Feed</span>
 						</Link>
@@ -41,6 +35,12 @@
 						<Link to="/settings" class="nav-link">
 							<span class="material-icons-outlined ">settings</span>
 							<span class="">Settings</span>
+						</Link>
+					</div>
+					<div>
+						<Link to="/profile/{$user.username}" class="nav-link">
+							<Avatar image={getImageUrl($user.avatar?.id)} username={$user.username} size={30} />
+							<Username>{$user.username}</Username>
 						</Link>
 					</div>
 					{#if $user?.roles.find((r) => r == "ADMIN") != null}

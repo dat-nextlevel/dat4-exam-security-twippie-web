@@ -3,7 +3,6 @@
 
 	import DefaultLayout from "../../components/layout/DefaultLayout.svelte";
 	import IconButton from "../../components/ui/buttons/IconButton.svelte";
-	import { getColorCssClassFromUsername } from "../../utils/util";
 	import AdminUsers from "./AdminUsers.svelte";
 </script>
 

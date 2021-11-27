@@ -7,23 +7,36 @@
 
 	import { api } from "../utils/settings";
 	import { user } from "../stores/user";
-	import type { Post } from "../types";
+	import type { Post, User } from "../types";
 	import { getSignedInUser } from "../authentication/authentication";
+	import { useParams } from "svelte-navigator";
+	import Avatar from "../components/ui/Avatar.svelte";
+	import { getColorCssClassFromUsername, getImageUrl } from "../utils/util";
 	import Username from "../components/ui/Username.svelte";
+	import dayjs from "dayjs";
+
+	const params = useParams();
+	let currentProfile: User;
 
 	let posts: Array<Post> = [];
 
-	async function fetchPosts() {
-		try {
-			const response = await api.get<Array<Post>>("posts", { params: { sortBy: "createdAt", sortDirection: "desc" } });
-			posts = response.data;
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
 	onMount(async () => {
-		await fetchPosts();
+		if ($params.profile) {
+			try {
+				const response = await api.get("users/username/" + $params.profile);
+				currentProfile = response.data;
+				posts = currentProfile.posts;
+			} catch (error) {
+				console.log(error);
+			}
+		} else {
+			try {
+				const response = await api.get<Array<Post>>("posts", { params: { sortBy: "createdAt", sortDirection: "desc" } });
+				posts = response.data;
+			} catch (error) {
+				console.log(error);
+			}
+		}
 	});
 
 	async function createPost(event: any) {
@@ -59,9 +72,26 @@
 	<div class="header-label">
 		<h1>Feed</h1>
 	</div>
-	{#if $user}
+	{#if !currentProfile}
 		<div class="mb-8">
-			<CreatePost on:created={createPost} />
+			{#if $user}
+				<CreatePost on:created={createPost} />
+			{/if}
+		</div>
+	{:else}
+		<div class="mb-8">
+			<div style="height:175px;" class="w-full rounded bg-{getColorCssClassFromUsername(currentProfile.username)}" />
+			<div class="flex flex-col gap-2 -my-12">
+				<Avatar className="border-8 border-white" image={getImageUrl(currentProfile.avatar?.id)} size={128} username={currentProfile.username} />
+			</div>
+			<div class="mt-14 flex border-b pb-4">
+				<span class="text-xl">
+					<Username>{currentProfile.username}</Username>
+				</span>
+				<span class="ml-auto">Joined {dayjs(currentProfile.createdDate).format("MMMM YYYY")}</span>
+			</div>
+			<h2 class="mt-8">Posts</h2>
+			<p class="text-sm">{currentProfile.posts.length} post(s).</p>
 		</div>
 	{/if}
 	<div>

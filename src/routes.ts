@@ -10,7 +10,10 @@ export const routes = [
 	 */
 	{
 		path: "/",
-		exact: true,
+		component: Feed
+	},
+	{
+		path: "/profile/*profile",
 		component: Feed
 	},
 	{

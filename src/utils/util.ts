@@ -22,8 +22,8 @@ export function getColorCssClassFromUsername(username: string) {
 	const variants = [200, 300, 400, 500, 600]
 
 	const chance = new Chance(username)
-	const colorI = chance.integer({ min: 0, max: colors.length })
-	const variantI = chance.integer({ min: 0, max: variants.length })
+	const colorI = chance.integer({ min: 0, max: colors.length - 1 })
+	const variantI = chance.integer({ min: 0, max: variants.length - 1 })
 
 
 	return colors[colorI] + "-" + variants[variantI]

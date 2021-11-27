@@ -10,6 +10,7 @@
 	import Username from "../Username.svelte";
 	import Dropdown from "sv-bootstrap-dropdown";
 	import { createEventDispatcher, onMount } from "svelte";
+	import { Link } from "svelte-navigator";
 	dayjs.extend(relativeTime);
 
 	const dispatcher = createEventDispatcher();
@@ -43,7 +44,7 @@
 		</div>
 		<div class="flex-1 p-2">
 			<header class="flex gap-2 place-items-center">
-				<Username>{post.author.username}</Username>
+				<Link to="/profile/{post.author.username}"><Username>{post.author.username}</Username></Link>
 				<span> · </span>
 				<span>{dayjs().diff(post.createdAt, "week") >= 1 ? dayjs(post.createdAt).format("MMM DD") : dayjs(post.createdAt).fromNow()}</span>
 				{#if isOwner}
