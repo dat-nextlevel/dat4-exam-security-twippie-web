@@ -30,6 +30,7 @@
 		"dayjs": "^1.10.7",
 		"postcss": "^7",
 		"sirv-cli": "^1.0.0",
+		"sv-bootstrap-dropdown": "^0.4.4",
 		"svelte-navigator": "^3.1.5",
 		"tailwindcss": "npm:@tailwindcss/postcss7-compat"
 	}

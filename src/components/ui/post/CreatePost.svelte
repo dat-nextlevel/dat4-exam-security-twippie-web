@@ -18,7 +18,8 @@
 	let showImage = false;
 	let input;
 
-	async function handlePost() {
+	async function handlePost(event: Event) {
+		const target = event.target as HTMLFormElement;
 		const formData = new FormData();
 		formData.append("content", content);
 		if (showImage) formData.append("image", input?.files[0]);
@@ -27,6 +28,8 @@
 
 		try {
 			const response = await api.post("posts", formData, { headers: { "Content-Type": "multipart/form-data" } });
+			target.reset();
+			showImage = false;
 			dispatcher("created", response.data as Post);
 		} catch (error) {}
 	}

@@ -4,7 +4,6 @@
 	import { user } from "../../../stores/user";
 	import Register from "../authentication/Register.svelte";
 	import Login from "../authentication/Login.svelte";
-	import IconButton from "../buttons/IconButton.svelte";
 	import Avatar from "../Avatar.svelte";
 	import { getImageUrl } from "../../../utils/util";
 	import Username from "../Username.svelte";
@@ -15,7 +14,7 @@
 <div class="flex-1 px-12">
 	<div class="sticky top-0 ml-auto" style="max-width:320px">
 		<div class="header-label">
-			<Link to="/aa"><span class="font-bold text-xl">twippie.</span></Link>
+			<Link to="/"><span class="font-bold text-xl">twippie.</span></Link>
 		</div>
 		<div>
 			{#if !$user}

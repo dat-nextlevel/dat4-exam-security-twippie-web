@@ -1,6 +1,4 @@
 <script>
-	import { user } from "../../stores/user";
-
 	import SideNavigation from "../ui/navigation/SideNavigation.svelte";
 </script>
 

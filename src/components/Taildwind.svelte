@@ -42,5 +42,13 @@
 		.nav-link {
 			@apply inline-flex rounded group gap-2 place-items-center hover:bg-indigo-500 text-black hover:text-indigo-700 hover:bg-opacity-10 transition-colors px-4 py-3;
 		}
+
+		.dropdown-menu {
+			@apply z-20;
+		}
+
+		.dropdown-content {
+			@apply rounded shadow-md bg-white gap-4 flex flex-col;
+		}
 	}
 </style>

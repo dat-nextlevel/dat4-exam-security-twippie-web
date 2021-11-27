@@ -8,24 +8,31 @@
 	import { user } from "../../../stores/user";
 	import { api } from "../../../utils/settings";
 	import Username from "../Username.svelte";
-	import { getSignedInUser } from "../../../authentication/authentication";
+	import Dropdown from "sv-bootstrap-dropdown";
+	import { createEventDispatcher, onMount } from "svelte";
 	dayjs.extend(relativeTime);
 
+	const dispatcher = createEventDispatcher();
+
 	export let post: Post;
+	export let doesLike;
+
+	let dropdownTrigger;
 
 	async function handleLike(_post: Post) {
 		if ($user) {
-			const doesLike = $user.likedPosts?.filter((lp) => lp.id == post.id).length > 0;
 			const response = await api.put(`posts/${_post.id}/like`, { isLiked: !doesLike });
-
-			post = response.data as Post;
-
-			user.set(await getSignedInUser());
+			dispatcher("liked", { post: response.data as Post, liked: !doesLike });
 		}
 	}
 
-	function isOwner() {
-		return post.author.username == $user?.username;
+	export let isOwner: boolean;
+
+	async function deletePost() {
+		try {
+			await api.delete(`posts/${post.id}`);
+			dispatcher("deleted", post);
+		} catch (error) {}
 	}
 </script>
 
@@ -39,9 +46,17 @@
 				<Username>{post.author.username}</Username>
 				<span> · </span>
 				<span>{dayjs().diff(post.createdAt, "week") >= 1 ? dayjs(post.createdAt).format("MMM DD") : dayjs(post.createdAt).fromNow()}</span>
-				{#if isOwner()}
-					<span class="ml-auto text-black">
-						<IconButton icon="more_horiz" color="indigo-500" size={18} />
+				{#if isOwner}
+					<span class="ml-auto text-black" bind:this={dropdownTrigger}>
+						<Dropdown triggerElement={dropdownTrigger}>
+							<IconButton icon="more_horiz" color="indigo-500" size={18} />
+							<div slot="DropdownMenu" class="dropdown-content">
+								<button on:click={deletePost} type="button" class="nav-link hover:bg-opacity-10 text-red-500 hover:bg-red-500 hover:text-red-500">
+									<span class="material-icons-outlined ">delete</span>
+									<span class="">Delete post</span>
+								</button>
+							</div>
+						</Dropdown>
 					</span>
 				{/if}
 			</header>
@@ -54,7 +69,7 @@
 			</div>
 			<footer class="mt-3">
 				<div class="flex items-center">
-					<IconButton on:click={() => handleLike(post)} icon="thumb_up" active={$user != null && $user.likedPosts?.filter((lp) => lp.id == post.id).length > 0} color="green-600" text={post.likes.length} />
+					<IconButton on:click={() => handleLike(post)} icon="thumb_up" active={doesLike} color="green-600" text={post.likes.length} />
 				</div>
 			</footer>
 		</div>

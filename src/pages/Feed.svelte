@@ -8,6 +8,8 @@
 	import { api } from "../utils/settings";
 	import { user } from "../stores/user";
 	import type { Post } from "../types";
+	import { getSignedInUser } from "../authentication/authentication";
+	import Username from "../components/ui/Username.svelte";
 
 	let posts: Array<Post> = [];
 
@@ -24,8 +26,32 @@
 		await fetchPosts();
 	});
 
-	async function handleCreatedPost(event: any) {
-		await fetchPosts();
+	async function createPost(event: any) {
+		const post = event.detail as Post;
+		posts = [post, ...posts];
+
+		$user = await getSignedInUser();
+	}
+
+	async function deletePost(event: any) {
+		const post = event.detail as Post;
+		posts = posts.filter((p) => p.id != post.id);
+
+		$user = await getSignedInUser();
+	}
+
+	async function likePost(event: any) {
+		const post = event.detail.post as Post;
+		const isLiked = event.detail.liked;
+
+		let likes: any = new Set(isLiked ? [...post.likes, $user.username] : post.likes.filter((f) => f != $user.username));
+		likes = [...likes];
+
+		posts = posts.map((p) => (p.id === post.id ? { ...p, likes } : p));
+
+		console.log(posts);
+
+		//$user = await getSignedInUser();
 	}
 </script>
 
@@ -35,7 +61,7 @@
 	</div>
 	{#if $user}
 		<div class="mb-8">
-			<CreatePost on:created={handleCreatedPost} />
+			<CreatePost on:created={createPost} />
 		</div>
 	{/if}
 	<div>
@@ -47,7 +73,7 @@
 			</div>
 		{/if}
 		{#each posts as post}
-			<PostComponent {post} />
+			<PostComponent {post} on:deleted={deletePost} on:liked={likePost} doesLike={post.likes.find((u) => u == $user?.username) != null} isOwner={post.author.username == $user?.username || $user?.roles.find((r) => r == "ADMIN") != null} />
 		{/each}
 	</div>
 </DefaultLayout>
