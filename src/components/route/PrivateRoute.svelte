@@ -4,10 +4,12 @@
 
 	export let path;
 	export let exact;
+	export let admin;
+	console.log(admin);
 </script>
 
 <Route {path} {exact} let:params let:location let:navigate>
-	<PrivateRouteGuard>
+	<PrivateRouteGuard {admin}>
 		<slot {params} {location} {navigate} />
 	</PrivateRouteGuard>
 </Route>

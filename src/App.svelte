@@ -16,7 +16,7 @@
 	<Router>
 		{#each routes as route}
 			{#if route.protected}
-				<PrivateRoute path={route.path} exact={route.exact}>
+				<PrivateRoute path={route.path} exact={route.exact} admin={route.admin}>
 					<svelte:component this={route.component} />
 				</PrivateRoute>
 			{:else}

@@ -24,7 +24,7 @@
 					<Login on:use={() => (form = "register")} />
 				{/if}
 			{:else}
-				<div class="flex gap-4 flex-col">
+				<nav class="flex gap-4 flex-col">
 					<div>
 						<Link to="/" class="nav-link">
 							<Avatar image={getImageUrl($user.avatar?.id)} size={30} />
@@ -43,13 +43,21 @@
 							<span class="">Settings</span>
 						</Link>
 					</div>
+					{#if $user?.roles.find((r) => r == "ADMIN") != null}
+						<div>
+							<Link to="/admin" class="nav-link hover:bg-opacity-10 text-sky-700 hover:bg-sky-500 hover:text-sky-700">
+								<span class="material-icons-outlined ">admin_panel_settings</span>
+								<span class="">Admin</span>
+							</Link>
+						</div>
+					{/if}
 					<div>
 						<button on:click={handleSignOut} type="button" class="nav-link hover:bg-opacity-10 text-red-500  hover:bg-red-500 hover:text-red-500">
 							<span class="material-icons-outlined ">logout</span>
 							<span class="">Sign out</span>
 						</button>
 					</div>
-				</div>
+				</nav>
 			{/if}
 		</div>
 	</div>

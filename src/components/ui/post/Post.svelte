@@ -51,7 +51,7 @@
 						<Dropdown triggerElement={dropdownTrigger}>
 							<IconButton icon="more_horiz" color="indigo-500" size={18} />
 							<div slot="DropdownMenu" class="dropdown-content">
-								<button on:click={deletePost} type="button" class="nav-link hover:bg-opacity-10 text-red-500 hover:bg-red-500 hover:text-red-500">
+								<button on:click={deletePost} type="button" class="dropdown-link hover:bg-opacity-10 text-red-500 hover:bg-red-500 hover:text-red-500">
 									<span class="material-icons-outlined ">delete</span>
 									<span class="">Delete post</span>
 								</button>

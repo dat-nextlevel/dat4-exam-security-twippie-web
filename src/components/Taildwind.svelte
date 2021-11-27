@@ -40,7 +40,15 @@
 		}
 
 		.nav-link {
-			@apply inline-flex rounded group gap-2 place-items-center hover:bg-indigo-500 text-black hover:text-indigo-700 hover:bg-opacity-10 transition-colors px-4 py-3;
+			@apply inline-flex rounded-full group gap-2 place-items-center hover:bg-indigo-500 text-black hover:text-indigo-700 hover:bg-opacity-10 transition-colors px-4 py-3;
+		}
+
+		.dropdown-link {
+			@apply nav-link rounded-none p-4 gap-3;
+		}
+
+		.nav-admin-link {
+			@apply nav-link p-0 hover:bg-opacity-0;
 		}
 
 		.dropdown-menu {
@@ -48,7 +56,7 @@
 		}
 
 		.dropdown-content {
-			@apply rounded shadow-md bg-white gap-4 flex flex-col;
+			@apply rounded filter shadow-lg drop-shadow-2xl bg-white gap-4 flex flex-col;
 		}
 	}
 </style>

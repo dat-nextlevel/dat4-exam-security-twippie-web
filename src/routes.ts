@@ -1,5 +1,6 @@
 import Feed from "./pages/Feed.svelte"
 import Settings from "./pages/Settings.svelte"
+import Admin from "./pages/admin/Admin.svelte"
 
 export const routes = [
 	/**
@@ -27,5 +28,18 @@ export const routes = [
 		protected: true,
 		component: Settings
 
+	},
+
+	/**
+	 * 
+	 * Admin
+	 * 
+	 */
+
+	{
+		path: "/admin/*adminRoute",
+		protected: true,
+		admin: true,
+		component: Admin
 	},
 ]

@@ -8,13 +8,25 @@
 	const navigate = useNavigate();
 	const location = useLocation();
 
+	export let admin;
+
 	onMount(async () => {
 		const _user = await getSignedInUser();
+
 		if (!_user) {
 			navigate("/", {
 				state: { from: $location.pathname },
 				replace: true,
 			});
+			return;
+		}
+
+		if (admin && _user?.roles.find((r) => r == "ADMIN") == null) {
+			navigate("/", {
+				state: { from: $location.pathname },
+				replace: true,
+			});
+			return;
 		}
 	});
 </script>
