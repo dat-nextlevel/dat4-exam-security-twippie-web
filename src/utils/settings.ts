@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const apiHost = process.env.API_HOST || "http://localhost:8080";
 
+console.log(apiHost)
+
 export const api = axios.create({
 	baseURL: apiHost + "/api/",
 	headers: {
