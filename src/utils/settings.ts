@@ -1,9 +1,7 @@
 import axios from "axios";
 
-export const apiHost = "https://dat4-security-twippie.herokuapp.com" // "http://localhost:8080";
-
-console.log(process.env.API_HOST)
-console.log(apiHost)
+// Little scuffed but will do
+export const apiHost = location.hostname.includes("localhost") ? "http://localhost:8080" : "https://dat4-security-twippie.herokuapp.com";
 
 export const api = axios.create({
 	baseURL: apiHost + "/api/",
