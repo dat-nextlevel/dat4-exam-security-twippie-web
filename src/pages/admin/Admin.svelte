@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
 	import { Link, Route, Router } from "svelte-navigator";
 
+	import AdminDashboard from "./AdminDashboard.svelte";
 	import DefaultLayout from "../../components/layout/DefaultLayout.svelte";
 	import IconButton from "../../components/ui/buttons/IconButton.svelte";
-	import AdminUser from "./AdminUser.svelte";
-	import AdminUsers from "./AdminUsers.svelte";
+	import AdminUser from "./users/AdminUser.svelte";
+	import AdminUsers from "./users/AdminUsers.svelte";
 </script>
 
 <DefaultLayout>
@@ -24,7 +25,9 @@
 			</Link>
 		</nav>
 
-		<Route path="/">Default</Route>
+		<Route path="/">
+			<AdminDashboard />
+		</Route>
 		<Route path="/users">
 			<AdminUsers />
 		</Route>

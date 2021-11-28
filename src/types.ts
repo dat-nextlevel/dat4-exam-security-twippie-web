@@ -3,7 +3,7 @@ export type User = {
 	"username": string,
 	"likedPosts": Array<Post>,
 	"posts": Array<Post>
-	"createdDate": number,
+	"createdAt": number,
 	"avatar": Image,
 	"email": String,
 	"roles": Array<string>,
@@ -22,6 +22,27 @@ export type Post = {
 export type Image = {
 	"id": string,
 	"url": string
+}
+
+export type Stats = {
+	"users": number,
+	"posts": number,
+}
+
+export type Audit = {
+	"id": number,
+	"issuer": User,
+	"against": User,
+	"createdAt": number
+	"type": string,
+	"typeUi": AuditUi
+
+}
+
+export type AuditUi = {
+	"cssColor": string,
+	"icon": string,
+	"action": string
 }
 
 export type FormDataLogin = {

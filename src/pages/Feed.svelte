@@ -100,7 +100,7 @@
 				<span class="text-xl">
 					<Username>{currentProfile.username}</Username>
 				</span>
-				<span class="ml-auto">Joined {dayjs(currentProfile.createdDate).format("MMMM YYYY")}</span>
+				<span class="ml-auto">Joined {dayjs(currentProfile.createdAt).format("MMMM YYYY")}</span>
 			</div>
 			<h2 class="mt-8">Posts</h2>
 			<p class="text-sm">{currentProfile.posts.length} post(s).</p>

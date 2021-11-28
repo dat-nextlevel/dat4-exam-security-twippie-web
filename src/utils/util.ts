@@ -28,3 +28,35 @@ export function getColorCssClassFromUsername(username: string) {
 
 	return colors[colorI] + "-" + variants[variantI]
 }
+
+export function getAuditUiUtilsFromAuditType(type: string) {
+	const audits = {
+		USER_MUTED: {
+			cssColor: "yellow-400",
+			icon: "person",
+			action: "update"
+		},
+		USER_UNMUTED: {
+			cssColor: "green-400",
+			icon: "person",
+			action: "add"
+		},
+		USER_DELETED: {
+			cssColor: "red-400",
+			icon: "person",
+			action: "remove"
+		},
+		POST_DELETED: {
+			cssColor: "purple-400",
+			icon: "forum",
+			action: "remove"
+		},
+		DEFAULT: {
+			cssColor: "indigo-400",
+			icon: "settings",
+			action: "update"
+		}
+	}
+
+	return audits[type] || audits["DEFAULT"]
+}

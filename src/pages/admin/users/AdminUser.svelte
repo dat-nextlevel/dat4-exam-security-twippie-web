@@ -4,11 +4,10 @@
 	import { onMount } from "svelte";
 
 	import { Link, navigate, useParams } from "svelte-navigator";
-	import Avatar from "../../components/ui/Avatar.svelte";
-	import Username from "../../components/ui/Username.svelte";
-	import type { User } from "../../types";
-	import { api } from "../../utils/settings";
-	import { getColorCssClassFromUsername, getImageUrl } from "../../utils/util";
+	import Avatar from "../../../components/ui/Avatar.svelte";
+	import type { User } from "../../../types";
+	import { api } from "../../../utils/settings";
+	import { getColorCssClassFromUsername, getImageUrl } from "../../../utils/util";
 
 	const params = useParams();
 
@@ -71,7 +70,7 @@
 					</span>
 					<span class="flex gap-2 place-items-center">
 						<span class="material-icons-outlined">event</span>
-						<p>Joined {dayjs(currentUser.createdDate).format("MMM DD YYYY")}</p>
+						<p>Joined {dayjs(currentUser.createdAt).format("MMM DD YYYY")}</p>
 					</span>
 					<span class="flex gap-2 place-items-center">
 						<span class="material-icons-outlined">thumb_up</span>

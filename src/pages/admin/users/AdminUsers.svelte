@@ -1,12 +1,11 @@
 <script lang="ts">
-	import dayjs from "dayjs";
 	import { onMount } from "svelte";
 	import { navigate } from "svelte-navigator";
-	import Avatar from "../../components/ui/Avatar.svelte";
-	import IconButton from "../../components/ui/buttons/IconButton.svelte";
-	import type { User } from "../../types";
-	import { api } from "../../utils/settings";
-	import { getImageUrl } from "../../utils/util";
+	import Avatar from "../../../components/ui/Avatar.svelte";
+	import IconButton from "../../../components/ui/buttons/IconButton.svelte";
+	import type { User } from "../../..//types";
+	import { api } from "../../../utils/settings";
+	import { getColorCssClassFromUsername, getImageUrl } from "../../../utils/util";
 
 	let users: Array<User> = [];
 
@@ -16,12 +15,22 @@
 	});
 </script>
 
+<div class="mb-8">
+	<h2>Users</h2>
+	<p>Keep track, view information and perform moderative actions on users.</p>
+</div>
+<div class="mb-8">
+	<div class="flex place-items-center gap-2">
+		<span style="width:14px; height:14px;" class="bg-yellow-400 bg-opacity-10 border-2 border-yellow-400 rounded-full" />
+		<p>Highlight indicates that a user is muted.</p>
+	</div>
+</div>
 <div class="overflow-x-auto">
 	<table class="w-full space-y-6 table-auto">
 		<thead class="font-bold">
-			<tr>
+			<tr class="border-b border-black border-opacity-20">
 				<td class="px-4">#</td>
-				<td class="px-4">Username</td>
+				<td class="px-4 py-4">Username</td>
 				<td class="px-4">Email</td>
 				<td class="px-4">Role</td>
 				<td />
@@ -39,11 +48,11 @@
 					</td>
 					<td class="px-4">{user.email}</td>
 					<td class="px-4">
-						<span class="flex gap-2">
+						<div class="flex gap-3">
 							{#each user.roles as role}
-								<span>{role}</span>
+								<span class="text-xs font-bold uppercase bg-opacity-30 bg-{getColorCssClassFromUsername(role)} p-1 px-2 rounded-full">{role}</span>
 							{/each}
-						</span>
+						</div>
 					</td>
 					<td class="px-4">
 						<span class="flex gap-2 place-items-center">
