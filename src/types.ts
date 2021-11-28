@@ -6,7 +6,8 @@ export type User = {
 	"createdDate": number,
 	"avatar": Image,
 	"email": String,
-	"roles": Array<string>
+	"roles": Array<string>,
+	"muted": boolean
 }
 
 export type Post = {

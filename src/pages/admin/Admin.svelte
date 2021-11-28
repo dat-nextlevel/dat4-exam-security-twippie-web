@@ -3,6 +3,7 @@
 
 	import DefaultLayout from "../../components/layout/DefaultLayout.svelte";
 	import IconButton from "../../components/ui/buttons/IconButton.svelte";
+	import AdminUser from "./AdminUser.svelte";
 	import AdminUsers from "./AdminUsers.svelte";
 </script>
 
@@ -26,6 +27,9 @@
 		<Route path="/">Default</Route>
 		<Route path="/users">
 			<AdminUsers />
+		</Route>
+		<Route path="/users/*username">
+			<AdminUser />
 		</Route>
 	</Router>
 </DefaultLayout>

@@ -15,15 +15,29 @@
 	import Username from "../components/ui/Username.svelte";
 	import dayjs from "dayjs";
 
-	const params = useParams();
+	let routeParams = useParams();
 	let currentProfile: User;
 
 	let posts: Array<Post> = [];
 
-	onMount(async () => {
-		if ($params.profile) {
+	async function updateUser(_routeParams) {
+		if (_routeParams.profile) {
 			try {
-				const response = await api.get("users/username/" + $params.profile);
+				const response = await api.get("users/username/" + _routeParams.profile);
+				currentProfile = response.data;
+				posts = currentProfile.posts;
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	}
+
+	$: updateUser($routeParams);
+
+	onMount(async () => {
+		if ($routeParams.profile) {
+			try {
+				const response = await api.get("users/username/" + $routeParams.profile);
 				currentProfile = response.data;
 				posts = currentProfile.posts;
 			} catch (error) {
@@ -61,8 +75,6 @@
 		likes = [...likes];
 
 		posts = posts.map((p) => (p.id === post.id ? { ...p, likes } : p));
-
-		console.log(posts);
 
 		//$user = await getSignedInUser();
 	}

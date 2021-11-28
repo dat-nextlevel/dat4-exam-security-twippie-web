@@ -39,6 +39,14 @@
 			@apply bg-indigo-400 transition-colors hover:bg-opacity-20 bg-opacity-10 hover:text-indigo-700 text-indigo-500 rounded px-4 py-2;
 		}
 
+		.bttn-danger {
+			@apply bttn bg-red-500 bg-opacity-10 text-red-800 hover:bg-red-500 hover:text-red-900 hover:bg-opacity-20;
+		}
+
+		.bttn-warning {
+			@apply bttn bg-yellow-500 bg-opacity-10 text-yellow-800 hover:bg-yellow-500 hover:text-yellow-900 hover:bg-opacity-20;
+		}
+
 		.nav-link {
 			@apply inline-flex rounded-full group gap-2 place-items-center hover:bg-indigo-500 text-black hover:text-indigo-700 hover:bg-opacity-10 transition-colors px-4 py-3;
 		}

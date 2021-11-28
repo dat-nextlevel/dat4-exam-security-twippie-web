@@ -29,7 +29,7 @@
 		</thead>
 		<tbody class="">
 			{#each users as user}
-				<tr class="hover:bg-opacity-10 hover:bg-indigo-400 cursor-pointer transition-colors" on:click={() => navigate("users/" + user.username)}>
+				<tr class=" {user.muted ? 'hover:bg-yellow-400 bg-yellow-400 hover:bg-opacity-20 bg-opacity-10' : 'hover:bg-indigo-400 hover:bg-opacity-10'} cursor-pointer transition-colors" on:click={() => navigate("users/" + user.username)}>
 					<td class="px-4"><span>{user.id}</span></td>
 					<td class="px-4">
 						<span class="flex place-items-center gap-4 py-4">
