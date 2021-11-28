@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const apiHost = "http://localhost:8080";
+export const apiHost = process.env.API_HOST || "http://localhost:8080";
 
 export const api = axios.create({
 	baseURL: apiHost + "/api/",
