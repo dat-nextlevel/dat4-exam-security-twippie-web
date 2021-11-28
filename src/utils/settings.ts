@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const apiHost = "https://dat4-security-twippie.herokuapp.com/" // "http://localhost:8080";
+export const apiHost = "https://dat4-security-twippie.herokuapp.com" // "http://localhost:8080";
 
 console.log(process.env.API_HOST)
 console.log(apiHost)
