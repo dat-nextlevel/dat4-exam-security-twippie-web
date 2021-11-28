@@ -75,8 +75,6 @@
 		likes = [...likes];
 
 		posts = posts.map((p) => (p.id === post.id ? { ...p, likes } : p));
-
-		//$user = await getSignedInUser();
 	}
 </script>
 

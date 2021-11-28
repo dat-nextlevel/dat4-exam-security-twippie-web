@@ -1,19 +1,20 @@
 <script lang="ts">
-	import { Route, Router, useLocation } from "svelte-navigator";
+	import { Route, useLocation } from "svelte-navigator";
 	import { routes } from "../routes";
 	import PrivateRoute from "./route/PrivateRoute.svelte";
 	import { user } from "../stores/user";
 	import { getSignedInUser } from "../authentication/authentication";
-	import { onMount } from "svelte";
 
-	// Accepting value for reactivity...?
+	// Skip initial double load work-around
+	let timesLoaded = 0;
+
 	async function updateSignedInUser(location: any) {
+		if (timesLoaded == 0) {
+			timesLoaded++;
+			return;
+		}
 		user.set(await getSignedInUser());
 	}
-
-	onMount(async () => {
-		updateSignedInUser("");
-	});
 
 	const location = useLocation();
 	$: updateSignedInUser($location);
