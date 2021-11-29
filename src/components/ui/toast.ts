@@ -1,11 +1,8 @@
-import { toast } from '@zerodevx/svelte-toast'
+import { toast } from "../../external-packages/svelte-toast"
 
 export const success = m => toast.push(m, {
-	theme: {
-
-	}
 })
 
-export const warning = m => toast.push(m, { theme: {} })
+export const warning = m => toast.push(m, { pausable: true, className: "warning" })
 
-export const failure = m => toast.push(m, { theme: {} })
+export const failure = m => toast.push(m, { pausable: true, className: "error" })

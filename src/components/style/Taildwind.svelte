@@ -66,5 +66,85 @@
 		.dropdown-content {
 			@apply rounded filter shadow-lg drop-shadow-2xl bg-white gap-4 flex flex-col;
 		}
+
+		/**
+		
+		
+		Svelte toast forces my hand...
+		
+		
+		
+		**/
+
+		._toastContainer {
+			@apply fixed right-14 top-14 z-50 flex flex-col gap-8;
+		}
+
+		._toastItem {
+			@apply bg-white border relative flex gap-4 border-gray-400 text-black max-w-xs p-4 rounded shadow-xl filter drop-shadow-lg;
+		}
+
+		._toastItem.error {
+			@apply bg-red-100 border-red-400 text-red-800;
+		}
+
+		._toastItem.warning {
+			@apply bg-yellow-100 border-yellow-400 text-yellow-800;
+		}
+
+		.pe,
+		._toastMsg :global(a) {
+			pointer-events: auto;
+		}
+		._toastBtn {
+			width: 2rem;
+			height: 100%;
+			font: 1rem sans-serif;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			outline: none;
+		}
+		._toastBar {
+			top: auto;
+			right: auto;
+			bottom: 0;
+			left: 0;
+			height: 2px;
+			width: 100%;
+			position: absolute;
+			display: block;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			border: none;
+			background: transparent;
+			pointer-events: none;
+		}
+		._toastBar::-webkit-progress-bar {
+			background: transparent;
+		}
+
+		._toastBar::-webkit-progress-value {
+			@apply bg-indigo-400;
+		}
+		._toastBar::-moz-progress-bar {
+			@apply bg-indigo-400;
+		}
+
+		.error ._toastBar::-webkit-progress-value {
+			@apply bg-red-400;
+		}
+		.error ._toastBar::-moz-progress-bar {
+			@apply bg-red-400;
+		}
+
+		.warning ._toastBar::-webkit-progress-value {
+			@apply bg-yellow-400;
+		}
+		.warning ._toastBar::-moz-progress-bar {
+			@apply bg-yellow-400;
+		}
 	}
 </style>

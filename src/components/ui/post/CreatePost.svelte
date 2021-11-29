@@ -31,8 +31,11 @@
 			showImage = false;
 			dispatcher("created", response.data as Post);
 		} catch (error) {
-			console.log(error.response);
-			failure(`An error occured: ${error.response.data.error} `);
+			if (error.response.status == 415) {
+				failure("Unsupported media type. Please use an image instead.");
+				return;
+			}
+			failure(error.response.data?.error || "Unknown error occured while performing this action.");
 		}
 	}
 
