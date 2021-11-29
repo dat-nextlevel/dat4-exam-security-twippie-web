@@ -5,6 +5,8 @@
 	import DefaultLayout from "../components/layout/DefaultLayout.svelte";
 	import Avatar from "../components/ui/Avatar.svelte";
 	import IconButton from "../components/ui/buttons/IconButton.svelte";
+	import Errors from "../components/ui/error/Errors.svelte";
+	import { failure, success } from "../components/ui/toast";
 	import { user } from "../stores/user";
 	import type { User } from "../types";
 	import { api } from "../utils/settings";
@@ -13,6 +15,8 @@
 	let newImageInput;
 	let imageData = getImageUrl($user.avatar?.id);
 	let changingImage = false;
+
+	let fieldErrors = null;
 
 	async function handleSubmit(event: Event) {
 		const target = event.target as HTMLFormElement;
@@ -23,7 +27,16 @@
 			const response = await api.put("users/me", data);
 			user.set(response.data as User);
 			target.reset();
-		} catch (error) {}
+			fieldErrors = null;
+			success("Your data was updated.");
+		} catch (error) {
+			if (error.response.status == 401) {
+				failure("Your current password did not match.");
+				return;
+			}
+			failure(error.response.data?.error || "Unknown error occured while performing this action.");
+			fieldErrors = error.response.data?.fieldErrors;
+		}
 	}
 
 	function handleImageSrc(): string {
@@ -54,7 +67,10 @@
 			target.reset();
 
 			changingImage = false;
-		} catch (error) {}
+			success("Your avatar was updated.");
+		} catch (error) {
+			failure(error.response.data?.error || "Unknown error occured while performing this action.");
+		}
 	}
 </script>
 
@@ -85,6 +101,9 @@
 			<span>{$user.email}</span>
 		</div>
 	</div>
+	{#if fieldErrors}
+		<Errors {fieldErrors} />
+	{/if}
 	<section>
 		<div class="mb-4">
 			<h2>Account information</h2>

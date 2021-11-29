@@ -11,6 +11,7 @@
 	import Dropdown from "sv-bootstrap-dropdown";
 	import { createEventDispatcher, onMount } from "svelte";
 	import { Link } from "svelte-navigator";
+	import { failure, success, warning } from "../toast";
 	dayjs.extend(relativeTime);
 
 	const dispatcher = createEventDispatcher();
@@ -22,8 +23,15 @@
 
 	async function handleLike(_post: Post) {
 		if ($user) {
-			const response = await api.put(`posts/${_post.id}/like`, { isLiked: !doesLike });
-			dispatcher("liked", { post: response.data as Post, liked: !doesLike });
+			const _newLikeState = !doesLike;
+			try {
+				const response = await api.put(`posts/${_post.id}/like`, { isLiked: _newLikeState });
+				dispatcher("liked", { post: response.data as Post, liked: _newLikeState });
+			} catch (error) {
+				failure(error.response.data?.error || "Unknown error occured while performing this action.");
+			}
+		} else {
+			warning("Sign in to like posts.");
 		}
 	}
 
@@ -33,7 +41,10 @@
 		try {
 			await api.delete(`posts/${post.id}`);
 			dispatcher("deleted", post);
-		} catch (error) {}
+			success("The post was deleted.");
+		} catch (error) {
+			failure(error.response.data?.error || "Unknown error occured while performing this action.");
+		}
 	}
 </script>
 

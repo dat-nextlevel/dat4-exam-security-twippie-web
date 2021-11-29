@@ -5,6 +5,7 @@
 
 	import { Link, navigate, useParams } from "svelte-navigator";
 	import Avatar from "../../../components/ui/Avatar.svelte";
+	import { failure, success } from "../../../components/ui/toast";
 	import type { User } from "../../../types";
 	import { api } from "../../../utils/settings";
 	import { getColorCssClassFromUsername, getImageUrl } from "../../../utils/util";
@@ -31,15 +32,29 @@
 	async function deleteUser() {
 		try {
 			const response = await api.delete(`users/${currentUser.username}`);
+			success(currentUser.username + " was deleted");
 			navigate("/admin/users");
-		} catch (error) {}
+		} catch (error) {
+			if (error.response.status == 401) {
+				failure("Admins can not be deleted.");
+				return;
+			}
+			failure(error.response.data?.error || "Unknown error occured while performing this action.");
+		}
 	}
 
 	async function muteUser() {
 		try {
 			const response = await api.post(`users/${currentUser.username}/mute`);
-			currentUser = response.data;
-		} catch (error) {}
+			currentUser = response.data as User;
+			success(currentUser.username + " was " + (currentUser.muted ? "muted" : "unmuted"));
+		} catch (error) {
+			if (error.response.status == 401) {
+				failure("Admins can not be muted.");
+				return;
+			}
+			failure(error.response.data?.error || "Unknown error occured while performing this action.");
+		}
 	}
 </script>
 

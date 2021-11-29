@@ -9,7 +9,7 @@
 </script>
 
 <DefaultLayout>
-	<Router>
+	<Router primary={false}>
 		<div class="header-label text-">
 			<Link to="/" class="flex place-items-center"><IconButton icon="arrow_back" color="indigo-500" /></Link>
 			<h1>Admin panel</h1>

@@ -16,9 +16,10 @@ export const getSignedInUser = async (): Promise<User> => {
 		try {
 			const response = await api.get<User>("users/me");
 			return response.data;
-		}
-		catch (error) {
-			console.log(error);
+		} catch (error) {
+			localStorage.removeItem("token")
+			navigate("/")
+			throw error;
 		}
 	}
 	return null;
@@ -32,7 +33,7 @@ export const register = async (data: FormDataRegister): Promise<User> => {
 
 		return await getSignedInUser();
 	} catch (error) {
-		console.log(error)
+		throw error;
 	}
 }
 
@@ -44,7 +45,7 @@ export const login = async (data: FormDataLogin): Promise<User> => {
 
 		return await getSignedInUser();
 	} catch (error) {
-		console.log(error)
+		throw error;
 	}
 }
 

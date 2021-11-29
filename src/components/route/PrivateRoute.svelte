@@ -3,7 +3,7 @@
 	import PrivateRouteGuard from "./PrivateRouteGuard.svelte";
 
 	export let path;
-	export let admin;
+	export let admin = false;
 </script>
 
 <Route {path} let:params let:location let:navigate>

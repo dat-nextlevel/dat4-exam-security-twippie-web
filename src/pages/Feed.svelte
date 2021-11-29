@@ -14,6 +14,7 @@
 	import { getColorCssClassFromUsername, getImageUrl } from "../utils/util";
 	import Username from "../components/ui/Username.svelte";
 	import dayjs from "dayjs";
+	import { success } from "../components/ui/toast";
 
 	let routeParams = useParams();
 	let currentProfile: User;

@@ -9,6 +9,7 @@
 	import Avatar from "../Avatar.svelte";
 	import IconButton from "../buttons/IconButton.svelte";
 	import TextArea from "../TextAreaAutosize.svelte";
+	import { failure } from "../toast";
 
 	const dispatcher = createEventDispatcher();
 
@@ -24,14 +25,15 @@
 		formData.append("content", content);
 		if (showImage) formData.append("image", input?.files[0]);
 
-		console.log(formData);
-
 		try {
 			const response = await api.post("posts", formData, { headers: { "Content-Type": "multipart/form-data" } });
 			target.reset();
 			showImage = false;
 			dispatcher("created", response.data as Post);
-		} catch (error) {}
+		} catch (error) {
+			console.log(error.response);
+			failure(`An error occured: ${error.response.data.error} `);
+		}
 	}
 
 	function handleInputChange() {

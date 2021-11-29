@@ -4,6 +4,7 @@
 	import { login } from "../../../authentication/authentication";
 	import { user } from "../../../stores/user";
 	import type { FormDataLogin } from "../../../types";
+	import { failure } from "../toast";
 
 	const dispatch = createEventDispatcher();
 
@@ -14,7 +15,15 @@
 		const formData = new FormData(target);
 		data = Object.fromEntries(formData) as FormDataLogin;
 
-		user.set(await login(data));
+		try {
+			user.set(await login(data));
+		} catch (error) {
+			if (error.response.status == 401) {
+				failure("Incorrect username and password combination.");
+				return;
+			}
+			failure(error.response.data?.error || "Unknown error occured while performing this action.");
+		}
 	}
 </script>
 

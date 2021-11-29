@@ -14,7 +14,9 @@
 <div class="flex-1 px-12">
 	<div class="sticky top-0 ml-auto" style="max-width:320px">
 		<div class="header-label">
-			<Link to="/"><span class="font-bold text-xl">twippie.</span></Link>
+			<header>
+				<Link to="/"><span class="font-bold text-xl">twippie.</span></Link>
+			</header>
 		</div>
 		<div>
 			{#if !$user}

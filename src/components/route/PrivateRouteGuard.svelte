@@ -17,7 +17,6 @@
 			});
 			return;
 		}
-
 		if (admin && $user?.roles.find((r) => r == "ADMIN") == null) {
 			navigate("/", {
 				state: { from: $location.pathname },
